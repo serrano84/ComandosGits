@@ -40,6 +40,9 @@ git add "nombrearchivo" -- agrega el archivo que sale en la lista de status
 git commit -m "descripcion del commit"
 
 
+--ver commits
+git log
+
 --ver en que rama estoy y ramas existen
 git branch -v
 
@@ -69,3 +72,16 @@ git remote remove origin
 --pasar los commits de una rama nueva a la rama master(pasar de rama test a rama master)
 -- debemos estar en rama master
 git merge test
+
+
+
+--regresar commits sin modificar mi codigo
+-- es decir, agregue un boton y hice un commit, si regreso con --soft elimina mi commit, pero deja mi boton en el codigo
+--para corregirlo y volver a subirlo.
+
+git reset --soft  "cadenacommit" --las cadenas lo vemos con git log
+
+
+--regresar commmit pero modifica nuestro codigo
+-- es decir, agregue un boton y hice un commit, si regreso con --hard elimina mi commit, y borra mi boton de mi codigo :/
+git reset --hard "cadenacommit"
