@@ -1,3 +1,5 @@
+--Para reiniciar todo, commit  todo.
+
 -- Remove the history from
 rm -rf .git
 
@@ -9,3 +11,61 @@ git commit -m "Initial commit"
 -- push to the github remote repos ensuring you overwrite history
 git remote add origin git@github.com:<YOUR ACCOUNT>/<YOUR REPOS>.git
 git push -u --force origin master
+
+
+
+--Clonar un repositorio remoto, solo es para trabajar local,revisar un proyecto
+git clone "urldelrepositorio"
+
+--bajar un proyecto y editar y subir cambios- recomendado porque con el clone tmb se puede
+
+git init
+git remote add origin git://github.com/cmcculloh/repo.git
+git fetch --all
+git pull origin master
+
+
+--siempre se debe inicializar para que git vigile todo lo q se esta moviendo
+git init
+
+--ver cambios que hay en ese workspace.
+git status
+
+--agregar los cambios para que esten listos cuando hagas el commit
+git add .    --agrega todo
+git add "nombrearchivo" -- agrega el archivo que sale en la lista de status
+
+
+--hacer commit local
+git commit -m "descripcion del commit"
+
+
+--ver en que rama estoy y ramas existen
+git branch -v
+
+--crear una rama
+git branch "nombre del branch"
+
+--cambiar de rama
+git checkout "nombreRama"
+
+
+--Conectar repositorio remoto , afuerza necesita un nombre ese repo, aqui lo llame origin
+git remote add origin  "url de repositorio de github"
+
+
+-- ver a que repositorio remoto esta conectado
+git remote -v
+
+-- subir cambios al repositorio remoto y rama especifica(tiene q estar conectado), aqui master, pero si es a otra
+-- rama creada por mi, pues lleva el nombre de la rama
+
+git push origin master
+
+--eliminar la conexion del repositorio remoto
+
+git remote remove origin
+
+--pasar los commits de una rama nueva a la rama master(pasar de rama test a rama master)
+-- debemos estar en rama master
+git merge test
