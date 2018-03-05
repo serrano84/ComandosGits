@@ -1,5 +1,5 @@
 --Para reiniciar todo, commit  todo.
---prueba
+
 -- Remove the history from
 rm -rf .git
 
