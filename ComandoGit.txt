@@ -93,4 +93,6 @@ git reset --hard "cadenacommit"
 git pull origin master
 
 --tengo cambios en mi local y cambios en el github, para subir mis cambios al remoto
---hago el commit de mis cambios, hago el pull y luego el local
+--hago el commit de mis cambios, hago el pull y luego el push.
+-cambios en la misma linea, hice mi commit local, y cuando hago el pull sale que hay conflicto, no recuerdo si hice
+--un git merge master pero dijo que no se podia, pero en el atom, me salieron las 2 linea y elegi cual usar.
