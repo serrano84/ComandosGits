@@ -93,4 +93,4 @@ git reset --hard "cadenacommit"
 git pull origin master
 
 --tengo cambios en mi local y cambios en el github, para subir mis cambios al remoto
---hago el commit de mis cambios, hago el pull y luego el push
+--hago el commit de mis cambios, hago el pull y luego el local
