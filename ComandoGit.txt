@@ -52,6 +52,8 @@ git branch "nombre del branch"
 --cambiar de rama
 git checkout "nombreRama"
 
+--eliminar rama
+git branch -d "nombre del branch"
 
 --Conectar repositorio remoto , afuerza necesita un nombre ese repo, aqui lo llame origin
 git remote add origin  "url de repositorio de github"
