@@ -87,3 +87,9 @@ git reset --soft  "cadenacommit" --las cadenas lo vemos con git log
 --regresar commmit pero modifica nuestro codigo
 -- es decir, agregue un boton y hice un commit, si regreso con --hard elimina mi commit, y borra mi boton de mi codigo :/
 git reset --hard "cadenacommit"
+
+
+--bajar cambios del remoto()
+git pull origin master
+
+--tengo cambios en mi local y cambios en el github
