@@ -1,23 +1,19 @@
---Para reiniciar todo, commit  todo.
+@autor Luis Serrano
+-- CON notepad++ poner en lenguaje D ---> Diff y se ven los comentario y comandos mejor
 
--- Remove the history from
-rm -rf .git
 
--- recreate the repos from the current content only
-git init
-git add .
-git commit -m "Initial commit"
-
--- push to the github remote repos ensuring you overwrite history
-git remote add origin git@github.com:<YOUR ACCOUNT>/<YOUR REPOS>.git
-git push -u --force origin master
-
+--Como usé para subir una version inicial a un repositorio remoto que aun no existia.
+--en la pagina de git cree el repositorio remoto, seleccionando que genere los archivos originales. README y etc.
+--en mi maquina cree mi workspace(vacio),  ahora ya con comandos bajo el proyecto (vacio).
+--una vez ya conectado, meto a mi workspace el proyecto java (tal cual como eclipse lo tiene),
+-- y ya sigo los comandos normales, lo del ADD , commit, push, pero solo subo lo source y lo webroot. 
 
 
 --Clonar un repositorio remoto, solo es para trabajar local,revisar un proyecto
 git clone "urldelrepositorio"
 
---bajar un proyecto y editar y subir cambios- recomendado porque con el clone tmb se puede
+
+--Bajar un proyecto y editar y subir cambios- recomendado porque con el clone tambien se puede.
 
 git init
 git remote add origin git://github.com/cmcculloh/repo.git
@@ -25,68 +21,127 @@ git fetch --all
 git pull origin master
 
 
---siempre se debe inicializar para que git vigile todo lo q se esta moviendo
-git init
-
---ver cambios que hay en ese workspace.
+--Ver cambios que hay en ese workspace(cuando salen los componentes en rojo es pq no hay nada (usar add) que hacerle commit, si estan en verde ya estan agregador y falta el commit).
 git status
 
---agregar los cambios para que esten listos cuando hagas el commit
+-Agregar los cambios para que esten listos cuando hagas el commit
 git add .    --agrega todo
 git add "nombrearchivo" -- agrega el archivo que sale en la lista de status
 
+-- Quitar del ADD
+git reset "archivo o carpeta"
 
---hacer commit local
+
+-- con el . agrega todo lo que esta en mi local , podria agregar todo el proyecto, y solo agregar el source o webroot para subir 
+-- (en lugar del . poner nombre de carpeta o archivo.) - cuando se hace commit solo lo sube al repositorio local pero no al remoto. para eso despues del commit usar el push.
+git init        --init seguramente ya no es necesario pq ya esta iniciado el repo.
+git add .
+git commit -m "Initial commit"
+
+
+--Hacer commit local
 git commit -m "descripcion del commit"
 
-
---ver commits
-git log
-
---ver en que rama estoy y ramas existen
-git branch -v
-
---crear una rama
-git branch "nombre del branch"
-
---cambiar de rama
-git checkout "nombreRama"
-
---eliminar rama
-git branch -d "nombre del branch"
-
---Conectar repositorio remoto , afuerza necesita un nombre ese repo, aqui lo llame origin
-git remote add origin  "url de repositorio de github"
+--Hacer commit con mensaje y autor
+git commit -m "descripcion del commit" --author="serrano <serrano_844@hotmail.com>"
 
 
--- ver a que repositorio remoto esta conectado
-git remote -v
+--Ver commits -- para salir del log es con "q"   (recordar que una cosa es que se vea el commit pero puede q no tenga el push al remoto)
+git log  
 
--- subir cambios al repositorio remoto y rama especifica(tiene q estar conectado), aqui master, pero si es a otra
--- rama creada por mi, pues lleva el nombre de la rama
 
+
+-- Subir cambios al repositorio remoto y rama especifica(tiene q estar conectado), aqui la rama remota es master, pero si es a otra
+-- rama creada por mi, pues lleva el nombre de la rama (parece ser que origin se refiere a la rama oculta que esta entre mi version local y el remoto, en ese origin estan los commits)
+-- (lei que para ver los ocultos es git branch -a ó --a)
 git push origin master
 
---eliminar la conexion del repositorio remoto
 
-git remote remove origin
-
---pasar los commits de una rama nueva a la rama master(pasar de rama test a rama master)
--- debemos estar en rama master
-git merge test
-
-
-
---regresar commits sin modificar mi codigo
+--Retonar commits sin modificar mi codigo (aun no esta en el remoto, no se le ha hecho el push)
 -- es decir, agregue un boton y hice un commit, si regreso con --soft elimina mi commit, pero deja mi boton en el codigo
 --para corregirlo y volver a subirlo.
+-- Eje. edite un css una linea, le di add , le di commit. con esto, me deshace el commit, pero deja mi modificacion en mi local.
+-- la cadena del commit que quiero retonar no es la que se pone, se pone una cadena anterior. (si hay 5 commit, y quiero quitar la 5a. debo poner la 4a)
+-- precaución ya que si hay 5 commit, y regreso a la 2a (mis commit 3,4 5, quedan en ADD hay q volverles hacer el commit).
 
 git reset --soft  "cadenacommit" --las cadenas lo vemos con git log
 
 
---regresar commmit pero modifica nuestro codigo
+--Regresar commmit pero modifica nuestro codigo
 -- es decir, agregue un boton y hice un commit, si regreso con --hard elimina mi commit, y borra mi boton de mi codigo :/
+-- misma explicacion del soft, pero elimina mi cambio y commits posteriores al que regrese.
 git reset --hard "cadenacommit"
+
+
+
+--Crear una rama (antes de hacerles ADD y commits, de preferencia subir esta rama al remoto, ya que solo existe en local)
+git branch "nombre del branch"
+
+
+--Subir rama nueva local a remoto. cree una nueva rama, pero este solo existe en el local, para subir esa rama
+-- hice git push url del repositorio "nombre-rama-nueva"  (esto lo hice xk habia perdido la conexion con el repo origin)
+-- con conexion no requiero la url, solo con el origin.
+git push origin "rama-nueva"
+
+
+--Ver en que rama estoy y que ramas existen , ver ramas ocultas seria con -a
+git branch -v
+
+
+--Cambiar de rama
+git checkout "nombreRama"
+
+
+--Para renombrar una rama local:
+$ git branch -m nombre-rama nombre-rama-nueva 
+
+
+--Eliminar rama
+git branch -d "nombre del branch"
+
+
+--Eliminar un branch remoto
+git push -d origin "rama-remota-a-eliminar"
+
+
+--Ver diferencia entre ramas, pero listado por componente, sin el stat se veria el detalle cada componente.
+git diff --stat branch1 branch2
+
+
+--Merge -Pasar los commits de una rama nueva a la rama master(pasar de rama test a rama master)
+-- debemos estar en rama master
+--al hacer ese merge , se ve el commit con el log, pero falta aplicar el push
+git merge test
+
+
+-- Ver a que repositorio remoto esta conectado
+git remote -v
+
+
+--Conectar repositorio remoto , afuerza necesita un nombre ese repo (parece ser que es oculto entre mi local y el remoto), aqui lo llame origin
+git remote add origin  "url de repositorio de github"
+
+
+--Eliminar la conexion del repositorio remoto
+-- cuando hice esto, no funcionaban mis push ya que no hay comunicación.
+
+git remote remove origin
+
+
+
+--Siempre se debe inicializar para que git vigile todo lo q se esta moviendo (esto siempre queda activo desde la primera vez que se baja el proyecto).
+-- es decir no lo requiero estar haciendo siempre y cuando ya exista la conexion, aunque cierre el prompt esto vive.
+git init
+
+
+-- Remove the history from
+rm -rf .git
+
+
+
+-- push to the github remote repos ensuring you overwrite history
+git remote add origin git@github.com:<YOUR ACCOUNT>/<YOUR REPOS>.git
+git push -u --force origin master
 
 
 --bajar cambios del remoto, si tengo cambios en mi local tengo q hacer el commit primero
@@ -96,3 +151,12 @@ git pull origin master
 --hago el commit de mis cambios, hago el pull y luego el push.
 -cambios en la misma linea, hice mi commit local, y cuando hago el pull sale que hay conflicto, no recuerdo si hice
 --un git merge master pero dijo que no se podia, pero en el atom, me salieron las 2 linea y elegi cual usar.
+
+
+
+
+
+ 
+
+ 
+ 
